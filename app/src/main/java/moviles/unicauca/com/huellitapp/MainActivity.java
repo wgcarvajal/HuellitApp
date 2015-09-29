@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.parse.ParseObject;
+
 
 public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
 {
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        /*ParseObject testObject = new ParseObject("TestObject");
+        testObject.put("foo", "bar");
+        testObject.saveInBackground();*/
 
         preferences= getSharedPreferences(LoginActivity.PREFERENCE,MODE_PRIVATE);
         editor=preferences.edit();
