@@ -5,18 +5,30 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import moviles.unicauca.com.huellitapp.adapters.PagerAdapter;
+import moviles.unicauca.com.huellitapp.fragments.MascotaFragment;
+import moviles.unicauca.com.huellitapp.fragments.TitleFragment;
 
 
-public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
-{
+public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
     private NavigationView nav;
@@ -26,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
 
+    private ViewPager pager;
+    private List<TitleFragment> data;
+
+    private PagerAdapter adapter;
+
 
 
     @Override
@@ -34,6 +51,35 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        pager= (ViewPager)findViewById(R.id.pager);
+
+
+        data= new ArrayList<>();
+
+
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("tipomascota");
+        query.addAscendingOrder("tiponombre");
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> parseObjects, ParseException e) {
+
+
+                if (e == null) {
+                    for (ParseObject tipomascota : parseObjects)
+                    {
+                        MascotaFragment mascotaFragment= new MascotaFragment();
+                        mascotaFragment.init(tipomascota.getString("tiponombre"));
+                        data.add(mascotaFragment);
+
+                    }
+
+                    adapter=new PagerAdapter(getSupportFragmentManager(),data);
+                    pager.setAdapter(adapter);
+
+                }
+            }
+        });
 
         /*ParseObject testObject = new ParseObject("TestObject");
         testObject.put("foo", "bar");
@@ -51,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         toggle= new ActionBarDrawerToggle(this,drawer,R.string.open_nav,R.string.close_nav);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
 
     }
@@ -116,4 +163,6 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         drawer.closeDrawers();
         return false;
     }
+
+
 }

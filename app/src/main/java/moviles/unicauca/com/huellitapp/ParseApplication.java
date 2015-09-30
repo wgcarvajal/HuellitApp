@@ -3,6 +3,8 @@ package moviles.unicauca.com.huellitapp;
 import android.app.Application;
 
 import com.parse.Parse;
+import com.parse.ParseObject;
+
 
 /**
  * Created by geovanny on 29/09/15.
@@ -19,6 +21,7 @@ public class ParseApplication extends Application
     {
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-        Parse.initialize(this,appId,clientKey);
+        Parse.initialize(this, appId, clientKey);
+
     }
 }
