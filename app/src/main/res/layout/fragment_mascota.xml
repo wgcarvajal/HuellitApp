@@ -3,14 +3,10 @@
     android:layout_height="match_parent"
     tools:context="moviles.unicauca.com.huellitapp.fragments.MascotaFragment"
     android:orientation="vertical">
-
-
     <ListView
         android:id="@+id/lst_mascotas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#00000000"
-        android:dividerHeight="10dp"/>
-
-
+        android:dividerHeight="2dp"/>
 </LinearLayout>

@@ -15,5 +15,11 @@
     <string name="txt_hint_pass">Contraseña</string>
     <string name="btn_in">Entrar</string>
 
+    <string name="idiomaactual">español</string>
+    <string name="ingreseUsuarioContraseña">Ingrese usuario y contraseña</string>
+    <string name="ingreseUsuario">Ingrese usuario</string>
+    <string name="ingreseContraseña">Ingrese contraseña</string>
+    <string name="datosinvalidos">Usuario o contraseña invalidos</string>
+
 
 </resources>

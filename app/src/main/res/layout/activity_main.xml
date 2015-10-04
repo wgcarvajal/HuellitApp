@@ -18,17 +18,14 @@
             android:layout_height="match_parent"
             >
             <android.support.v4.view.PagerTabStrip
+                android:id="@+id/pagerTab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#333333"
                 android:textColor="#ffffff"
                 />
         </android.support.v4.view.ViewPager>
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            />
+
         <android.support.design.widget.NavigationView
 
             android:id="@+id/nav"

@@ -13,7 +13,6 @@ public class Mascota
     {
 
     }
-
     public String getNombre()
     {
         return nombre;

@@ -9,25 +9,21 @@ import android.os.Bundle;
 import android.util.ArraySet;
 import android.util.Log;
 
+import com.parse.ParseUser;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 public class RootActivity extends AppCompatActivity
 {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        Intent intent;
 
-        SharedPreferences preferences= getSharedPreferences(LoginActivity.PREFERENCE,MODE_PRIVATE);
-        boolean loging= preferences.getBoolean(LoginActivity.KEY_LOGIN, false);
-
-        Intent intent= null;
-
-        if(loging)
+        if(ParseUser.getCurrentUser() != null)
         {
 
             intent=new Intent(this,MainActivity.class);
@@ -36,10 +32,7 @@ public class RootActivity extends AppCompatActivity
         {
             intent=new Intent(this,LoginActivity.class);
         }
-
         startActivity(intent);
-
+        finish();
     }
-
-
 }

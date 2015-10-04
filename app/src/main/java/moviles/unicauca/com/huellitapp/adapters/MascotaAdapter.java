@@ -16,8 +16,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-
-
 import java.util.List;
 
 import moviles.unicauca.com.huellitapp.R;
@@ -58,20 +56,22 @@ public class MascotaAdapter extends BaseAdapter
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
         View v = null;
 
-        if (convertView == null) {
+        if (convertView == null)
+        {
             v = View.inflate(context, R.layout.template_mascota, null);
-        } else {
+        }
+        else
+        {
             v = convertView;
         }
 
         Mascota m = (Mascota) getItem(position);
-
         TextView txt_nombremascota = (TextView) v.findViewById(R.id.txt_nombremascota);
-        txt_nombremascota.setText(m.getNombre());
+        txt_nombremascota.setText(m.getNombre().toUpperCase());
 
         ////////////////////////////////////////////////////////////
 
@@ -81,14 +81,17 @@ public class MascotaAdapter extends BaseAdapter
         query.whereEqualTo("mascota", m.getId());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
-            public void done(List<ParseObject> list, ParseException e) {
-                if (!list.isEmpty()) {
-
-
+            public void done(List<ParseObject> list, ParseException e)
+            {
+                if (!list.isEmpty())
+                {
                     ParseFile fileObject = (ParseFile) list.get(0).get("foto");
-                    fileObject.getDataInBackground(new GetDataCallback() {
-                        public void done(byte[] data, ParseException e) {
-                            if (e == null) {
+                    fileObject.getDataInBackground(new GetDataCallback()
+                    {
+                        public void done(byte[] data, ParseException e)
+                        {
+                            if (e == null)
+                            {
                                 Log.d("test", "Llegaron datos.");
                                 // Decode the Byte[] into
                                 // Bitmap
@@ -101,7 +104,9 @@ public class MascotaAdapter extends BaseAdapter
                                 ad1.setImageBitmap(bmp);
                                 // Close progress dialog
 
-                            } else {
+                            }
+                            else
+                            {
                                 Log.d("test", "Hubo un problema al traer los datos.");
                             }
                         }
@@ -111,5 +116,4 @@ public class MascotaAdapter extends BaseAdapter
         });
         return v;
     }
-
 }
