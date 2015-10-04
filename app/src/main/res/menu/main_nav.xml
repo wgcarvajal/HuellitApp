@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/nav_home"
+        android:title="@string/nav_home"
+        />
 
-    <item android:title="Account">
+    <item android:id="@+id/nav_mypublications"
+        android:title="@string/nav_mypublications"/>
+
+    <item android:title="@string/nav_account">
         <menu>
-            <item android:title="Profile"/>
             <item
-                android:id="@+id/nav_sesionout"
-                android:title="Sign out"
-                />
+                android:id="@+id/nav_profile"
+                android:title="@string/nav_profile"/>
+            <item
+                android:id="@+id/nav_sessionout"
+                android:title="@string/nav_sessionout"/>
         </menu>
+
     </item>
 
 </menu>

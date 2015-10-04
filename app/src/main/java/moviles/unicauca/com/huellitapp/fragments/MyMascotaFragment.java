@@ -3,15 +3,19 @@ package moviles.unicauca.com.huellitapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +23,12 @@ import moviles.unicauca.com.huellitapp.R;
 import moviles.unicauca.com.huellitapp.adapters.MascotaAdapter;
 import moviles.unicauca.com.huellitapp.modelo.Mascota;
 
-public class MascotaFragment extends TitleFragment
-{
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MyMascotaFragment extends TitleFragment{
+
+
     public static String POSITIONLIST="poslist";
 
     private String tipo;
@@ -30,7 +38,7 @@ public class MascotaFragment extends TitleFragment
     private MascotaAdapter adapter;
     private  int poslist;
 
-    public MascotaFragment()
+    public MyMascotaFragment()
     {
         // Required empty public constructor
     }
@@ -53,7 +61,7 @@ public class MascotaFragment extends TitleFragment
         {
             tipo = savedInstanceState.getString("tipo");
             poslist=savedInstanceState.getInt(POSITIONLIST);
-            Log.i("focus item:",""+ poslist);
+            Log.i("focus item:", "" + poslist);
         }
     }
     @Override
@@ -73,9 +81,10 @@ public class MascotaFragment extends TitleFragment
     }
     public void loadData()
     {
-
+        String user=ParseUser.getCurrentUser().getUsername();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
         query.whereEqualTo("tiponombre", tipo);
+        query.whereEqualTo("username",user);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -98,19 +107,19 @@ public class MascotaFragment extends TitleFragment
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState)
-    {
+    public void onSaveInstanceState(Bundle outState) {
         outState.putString("tipo", tipo);
         outState.putInt(POSITIONLIST,lst_mascotas.getFirstVisiblePosition());
         super.onSaveInstanceState(outState);
     }
 
-
     public void buscar(String nombre)
     {
         data.clear();
+        String user=ParseUser.getCurrentUser().getUsername();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
         query.whereEqualTo("tiponombre", tipo);
+        query.whereEqualTo("username",user);
         query.whereContains("masnombre", nombre);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
@@ -128,4 +137,5 @@ public class MascotaFragment extends TitleFragment
             }
         });
     }
+
 }

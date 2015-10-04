@@ -20,6 +20,14 @@
     <string name="ingreseUsuario">Ingrese usuario</string>
     <string name="ingreseContraseña">Ingrese contraseña</string>
     <string name="datosinvalidos">Usuario o contraseña invalidos</string>
+    <string name="action_search">Buscar</string>
+    <string name="action_add">Agregar</string>
+    <string name="title_activity_mypublications">Mis publicaciones</string>
+    <string name="nav_home">Inicio</string>
+    <string name="nav_mypublications">Mis Publicaciones</string>
+    <string name="nav_profile">Perfil</string>
+    <string name="nav_sessionout">Cerrar session</string>
+    <string name="nav_account">Cuenta</string>
 
 
 </resources>

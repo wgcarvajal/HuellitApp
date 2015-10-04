@@ -8,29 +8,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SearchEvent;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import moviles.unicauca.com.huellitapp.adapters.PagerAdapter;
 import moviles.unicauca.com.huellitapp.fragments.MascotaFragment;
+import moviles.unicauca.com.huellitapp.fragments.MyMascotaFragment;
 import moviles.unicauca.com.huellitapp.fragments.TitleFragment;
-import moviles.unicauca.com.huellitapp.modelo.Mascota;
 
-
-public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
+public class MypublicationsActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
 {
     public static String POSITION="pos";
 
@@ -45,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mypublications);
 
         final int pos;
 
@@ -74,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
                     for (ParseObject tipomascota : parseObjects) {
 
                         String idioma = getResources().getString(R.string.idiomaactual);
-                        MascotaFragment mascotaFragment = new MascotaFragment();
+                        MyMascotaFragment mascotaFragment = new MyMascotaFragment();
                         if (idioma.equals("ingles")) {
                             mascotaFragment.init(tipomascota.getString("tiponombre"), tipomascota.getString("tiponombreingles"));
                         } else {
@@ -88,20 +84,20 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
                 }
             }
         });
-        drawer=(DrawerLayout)findViewById(R.id.drawer);
 
+        drawer=(DrawerLayout)findViewById(R.id.drawer);
         drawer.setDrawerListener(this);
         nav= (NavigationView)findViewById(R.id.nav);
         nav.setNavigationItemSelectedListener(this);
         toggle= new ActionBarDrawerToggle(this,drawer,R.string.open_nav,R.string.close_nav);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
+        getMenuInflater().inflate(R.menu.menu_mypublications, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -121,12 +117,14 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState)
     {
         super.onPostCreate(savedInstanceState);
         toggle.syncState();
     }
+
     @Override
     public void onDrawerSlide(View drawerView, float slideOffset)
     {
@@ -159,9 +157,9 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
                 intent = new Intent(this,LoginActivity.class);
                 startActivity(intent);
                 finish();
-            break;
-            case R.id.nav_mypublications:
-                intent = new Intent(this,MypublicationsActivity.class);
+                break;
+            case R.id.nav_home:
+                intent = new Intent(this,MainActivity.class);
                 startActivity(intent);
                 finish();
                 break;
@@ -194,9 +192,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
     private void doSearch(String queryStr)
     {
-        ((MascotaFragment)adapter.getItem(pager.getCurrentItem())).buscar(queryStr);
+        ((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).buscar(queryStr);
 
     }
-
-
 }
