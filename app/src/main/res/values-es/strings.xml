@@ -21,6 +21,7 @@
     <string name="ingreseContraseña">Ingrese contraseña</string>
     <string name="datosinvalidos">Usuario o contraseña invalidos</string>
     <string name="ingreseMascota">Ingrese nombre de la mascota</string>
+    <string name="ingreseFoto">Seleccione una foto</string>
 
     <string name="action_search">Buscar</string>
     <string name="action_add">Agregar</string>

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -122,7 +123,8 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
 
                     Intent intent = new Intent(this,AddpetActivity.class);
                     intent.putExtra("tipo",((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).getTipo());
-                    startActivityForResult(intent,ADD_CODE);
+                    intent.putExtra("tipoIdioma",((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).getTipoIdioma());
+                    startActivityForResult(intent, ADD_CODE);
                 break;
 
             }
@@ -204,16 +206,19 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
 
     private void doSearch(String queryStr)
     {
-        ((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).buscar(queryStr);
-
+        ((MyMascotaFragment)getSupportFragmentManager().getFragments().get(pager.getCurrentItem())).buscar(queryStr);
     }
 
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (requestCode == ADD_CODE && resultCode==RESULT_OK )
         {
-            String resultado = data.getExtras().getString("resultado");
-            Log.i("Saludo:",resultado);
+            if(data.getExtras().getString("resultado").equals("S"))
+            {
+                ((MyMascotaFragment)getSupportFragmentManager().getFragments().get(pager.getCurrentItem())).buscar("");
+                Toast.makeText(getApplicationContext(), "Mascota Guardada", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

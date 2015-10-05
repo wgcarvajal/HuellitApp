@@ -86,6 +86,7 @@ public class MyMascotaFragment extends TitleFragment{
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
         query.whereEqualTo("tiponombre", tipo);
         query.whereEqualTo("username", user);
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -122,8 +123,9 @@ public class MyMascotaFragment extends TitleFragment{
         String user=ParseUser.getCurrentUser().getUsername();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
         query.whereEqualTo("tiponombre", tipo);
-        query.whereEqualTo("username",user);
+        query.whereEqualTo("username", user);
         query.whereContains("masnombre", nombre);
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -144,6 +146,10 @@ public class MyMascotaFragment extends TitleFragment{
     public String getTipo()
     {
         return tipo;
+    }
+    public String getTipoIdioma()
+    {
+        return tipoIdioma;
     }
 
 }

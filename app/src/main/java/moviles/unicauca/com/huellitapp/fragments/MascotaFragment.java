@@ -74,9 +74,9 @@ public class MascotaFragment extends TitleFragment
     }
     public void loadData()
     {
-
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
         query.whereEqualTo("tiponombre", tipo);
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {

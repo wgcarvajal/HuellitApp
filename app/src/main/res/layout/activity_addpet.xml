@@ -25,6 +25,12 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/edit_petname"
                 />
+            <Spinner
+                android:id="@+id/sp_meses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/meses"
+                />
 
             <Button
                 android:id="@+id/btn_addchangephote"
@@ -35,7 +41,8 @@
             <ImageView
                 android:id="@+id/img_photopet"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="150dp"
+                android:scaleType="centerCrop"/>
 
             <Button
                 android:id="@+id/btn_savepet"
