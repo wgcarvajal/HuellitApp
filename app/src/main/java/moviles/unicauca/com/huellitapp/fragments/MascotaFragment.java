@@ -52,6 +52,7 @@ public class MascotaFragment extends TitleFragment
         if(savedInstanceState!=null)
         {
             tipo = savedInstanceState.getString("tipo");
+            tipoIdioma=savedInstanceState.getString("tipoIdioma");
             poslist=savedInstanceState.getInt(POSITIONLIST);
             Log.i("focus item:",""+ poslist);
         }
@@ -101,6 +102,7 @@ public class MascotaFragment extends TitleFragment
     public void onSaveInstanceState(Bundle outState)
     {
         outState.putString("tipo", tipo);
+        outState.putString("tipoIdioma", tipoIdioma);
         outState.putInt(POSITIONLIST,lst_mascotas.getFirstVisiblePosition());
         super.onSaveInstanceState(outState);
     }

@@ -60,6 +60,7 @@ public class MyMascotaFragment extends TitleFragment{
         if(savedInstanceState!=null)
         {
             tipo = savedInstanceState.getString("tipo");
+            tipoIdioma=savedInstanceState.getString("tipoIdioma");
             poslist=savedInstanceState.getInt(POSITIONLIST);
             Log.i("focus item:", "" + poslist);
         }
@@ -84,7 +85,7 @@ public class MyMascotaFragment extends TitleFragment{
         String user=ParseUser.getCurrentUser().getUsername();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
         query.whereEqualTo("tiponombre", tipo);
-        query.whereEqualTo("username",user);
+        query.whereEqualTo("username", user);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -107,8 +108,10 @@ public class MyMascotaFragment extends TitleFragment{
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(Bundle outState)
+    {
         outState.putString("tipo", tipo);
+        outState.putString("tipoIdioma", tipoIdioma);
         outState.putInt(POSITIONLIST,lst_mascotas.getFirstVisiblePosition());
         super.onSaveInstanceState(outState);
     }
@@ -136,6 +139,11 @@ public class MyMascotaFragment extends TitleFragment{
                 }
             }
         });
+    }
+
+    public String getTipo()
+    {
+        return tipo;
     }
 
 }

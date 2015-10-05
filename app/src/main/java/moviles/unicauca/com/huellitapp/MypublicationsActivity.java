@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,8 @@ import moviles.unicauca.com.huellitapp.fragments.TitleFragment;
 
 public class MypublicationsActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
 {
+    private final int ADD_CODE=100;
+
     public static String POSITION="pos";
 
     private DrawerLayout drawer;
@@ -110,9 +113,18 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
         }
         else
         {
-            if (item.getItemId() == R.id.action_search)
+            switch (item.getItemId())
             {
-                return onSearchRequested();
+                case R.id.action_search:
+                    return onSearchRequested();
+
+                case R.id.action_add:
+
+                    Intent intent = new Intent(this,AddpetActivity.class);
+                    intent.putExtra("tipo",((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).getTipo());
+                    startActivityForResult(intent,ADD_CODE);
+                break;
+
             }
         }
         return super.onOptionsItemSelected(item);
@@ -194,5 +206,14 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
     {
         ((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).buscar(queryStr);
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == ADD_CODE && resultCode==RESULT_OK )
+        {
+            String resultado = data.getExtras().getString("resultado");
+            Log.i("Saludo:",resultado);
+        }
     }
 }

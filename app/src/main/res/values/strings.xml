@@ -19,6 +19,7 @@
     <string name="ingreseUsuario">Enter username</string>
     <string name="ingreseContraseña">Enter password</string>
     <string name="datosinvalidos">Invalid login parameters</string>
+    <string name="ingreseMascota">Enter name pet</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -30,6 +31,16 @@
     <string name="nav_profile">Profile</string>
     <string name="nav_sessionout">Sign out</string>
     <string name="nav_account">Account</string>
+    <string name="title_activity_addpet">Add pet</string>
+    <string name="edit_petname">Pet name</string>
+    <string name="btn_addchangephoto">Add or change photo</string>
+    <string name="btn_savepet">save</string>
+
+    <string name="tomarFoto"> Take a picture</string>
+    <string name="seleccionar"> Choose from gallery</string>
+    <string name="cancelar"> Cancel</string>
+
+    <string name="eligeOpcion">make your choice :D</string>
 
 
 </resources>

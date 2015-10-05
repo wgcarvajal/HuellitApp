@@ -20,6 +20,8 @@
     <string name="ingreseUsuario">Ingrese usuario</string>
     <string name="ingreseContraseña">Ingrese contraseña</string>
     <string name="datosinvalidos">Usuario o contraseña invalidos</string>
+    <string name="ingreseMascota">Ingrese nombre de la mascota</string>
+
     <string name="action_search">Buscar</string>
     <string name="action_add">Agregar</string>
     <string name="title_activity_mypublications">Mis publicaciones</string>
@@ -28,6 +30,17 @@
     <string name="nav_profile">Perfil</string>
     <string name="nav_sessionout">Cerrar session</string>
     <string name="nav_account">Cuenta</string>
+    <string name="title_activity_addpet">Agregar Mascota</string>
+    <string name="edit_petname">Nombre de la mascota</string>
+    <string name="btn_addchangephoto">Agregar o cambiar foto</string>
+    <string name="btn_savepet">Guardar</string>
+
+
+    <string name="tomarFoto"> Tomar Foto</string>
+    <string name="seleccionar"> Elegir de galeria </string>
+    <string name="cancelar"> Cancelar</string>
+
+    <string name="eligeOpcion">Elige una opcion :D</string>
 
 
 </resources>
