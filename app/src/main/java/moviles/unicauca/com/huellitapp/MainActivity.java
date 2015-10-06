@@ -31,7 +31,7 @@ import moviles.unicauca.com.huellitapp.modelo.Mascota;
 import moviles.unicauca.com.huellitapp.modelo.TipoMascota;
 
 
-public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
+public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener,MascotaFragment.OnItemSelected
 {
     public static String POSITION="pos";
 
@@ -204,4 +204,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
     }
 
 
+    @Override
+    public void onItemSelected(String idmascota) {
+        Log.i("id mascota seleccion:",""+idmascota);
+    }
 }

@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -20,20 +23,32 @@ import moviles.unicauca.com.huellitapp.adapters.MascotaAdapter;
 import moviles.unicauca.com.huellitapp.modelo.Mascota;
 import moviles.unicauca.com.huellitapp.modelo.TipoMascota;
 
-public class MascotaFragment extends TitleFragment
-{
+public class MascotaFragment extends TitleFragment implements AdapterView.OnItemClickListener, View.OnClickListener {
     public static String POSITIONLIST="poslist";
 
     private TipoMascota tipoMascota;
     private ListView lst_mascotas;
     private List<Mascota> data;
     private MascotaAdapter adapter;
+    private ImageView imgUbicacion;
     private  int poslist;
 
     public MascotaFragment()
     {
         // Required empty public constructor
     }
+
+
+
+
+    public interface OnItemSelected
+    {
+        void onItemSelected(String idmascota);
+    }
+
+    OnItemSelected onItemSelected;
+
+
     public void init(String tiponombre,String tiponombreingles)
     {
         tipoMascota=new TipoMascota();
@@ -44,6 +59,7 @@ public class MascotaFragment extends TitleFragment
     public void onAttach(Context context)
     {
         super.onAttach(context);
+        onItemSelected = (OnItemSelected) context;
     }
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -65,14 +81,27 @@ public class MascotaFragment extends TitleFragment
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_mascota, container, false);
         lst_mascotas=(ListView) v.findViewById(R.id.lst_mascotas);
-
+        imgUbicacion=(ImageView)v.findViewById(R.id.img_ubicacion);
         data=new ArrayList<>();
         adapter= new MascotaAdapter(v.getContext(),data);
         lst_mascotas.setAdapter(adapter);
+        lst_mascotas.setOnItemClickListener(this);
+
+        imgUbicacion.setOnClickListener(this);
 
         loadData();
 
         return v;
+    }
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+    {
+        Log.i("Entro", "onitemclick");
+        onItemSelected.onItemSelected(data.get(position).getId());
+    }
+    @Override
+    public void onClick(View v) {
+        Log.i("entro imagen", "click");
     }
     public void loadData()
     {
