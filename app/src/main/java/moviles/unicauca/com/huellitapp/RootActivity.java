@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.ArraySet;
 import android.util.Log;
 
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
 import java.util.List;
@@ -23,15 +24,16 @@ public class RootActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Intent intent;
 
-        if(ParseUser.getCurrentUser() != null)
-        {
 
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
             intent=new Intent(this,MainActivity.class);
         }
         else
         {
             intent=new Intent(this,LoginActivity.class);
         }
+
         startActivity(intent);
         finish();
     }

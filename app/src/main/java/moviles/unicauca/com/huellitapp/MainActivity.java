@@ -28,6 +28,7 @@ import moviles.unicauca.com.huellitapp.adapters.PagerAdapter;
 import moviles.unicauca.com.huellitapp.fragments.MascotaFragment;
 import moviles.unicauca.com.huellitapp.fragments.TitleFragment;
 import moviles.unicauca.com.huellitapp.modelo.Mascota;
+import moviles.unicauca.com.huellitapp.modelo.TipoMascota;
 
 
 public class MainActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         adapter = new PagerAdapter(getSupportFragmentManager(), data);
         pager.setAdapter(adapter);
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("tipomascota");
-        query.addAscendingOrder("tiponombre");
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(TipoMascota.TABLA);
+        query.addAscendingOrder(TipoMascota.TIPONOMBRE);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -76,9 +77,9 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
                         String idioma = getResources().getString(R.string.idiomaactual);
                         MascotaFragment mascotaFragment = new MascotaFragment();
                         if (idioma.equals("ingles")) {
-                            mascotaFragment.init(tipomascota.getString("tiponombre"), tipomascota.getString("tiponombreingles"));
+                            mascotaFragment.init(tipomascota.getString(TipoMascota.TIPONOMBRE), tipomascota.getString(TipoMascota.TIPONOMBREINGLES));
                         } else {
-                            mascotaFragment.init(tipomascota.getString("tiponombre"), tipomascota.getString("tiponombre"));
+                            mascotaFragment.init(tipomascota.getString(TipoMascota.TIPONOMBRE), tipomascota.getString(TipoMascota.TIPONOMBRE));
                         }
                         data.add(mascotaFragment);
                         adapter.notifyDataSetChanged();

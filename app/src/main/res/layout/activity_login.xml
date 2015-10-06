@@ -1,42 +1,31 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
     tools:context=".MainActivity"
-    android:orientation="vertical"
-    android:gravity="center">
+    >
 
     <ImageView
         android:layout_width="@dimen/logo_wh"
         android:layout_height="@dimen/logo_wh"
-        android:src="@mipmap/ic_logo"/>
-
-    <EditText
-        android:id="@+id/edit_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="@string/txt_hint_user"/>
-    <EditText
-        android:id="@+id/edit_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:password="true"
-        android:hint="@string/txt_hint_pass"/>
+        android:src="@mipmap/ic_logo"
+        android:layout_centerInParent="true"
+        />
 
     <Button
-        android:id="@+id/btn_in"
-        android:layout_width="match_parent"
+        android:id="@+id/btn_facebook"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_in"/>
+        android:background="@drawable/com_facebook_button_background"
+        android:drawableLeft="@drawable/com_facebook_button_icon"
+        android:drawablePadding="@dimen/com_facebook_share_button_compound_drawable_padding"
+        android:paddingLeft="@dimen/com_facebook_share_button_padding_left"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:text="@string/btn_facebook"
+        android:textColor="@color/com_facebook_share_button_text_color"
 
-    <TextView
-        android:id="@+id/txt_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autoLink="web"
-        android:linksClickable="true"
-        android:gravity="center"
-        android:text="@string/txt_registrase"/>
+         />
 
-</LinearLayout>
+</RelativeLayout>

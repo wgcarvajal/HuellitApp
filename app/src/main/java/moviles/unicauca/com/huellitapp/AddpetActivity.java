@@ -29,6 +29,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import moviles.unicauca.com.huellitapp.modelo.FotoMascota;
+import moviles.unicauca.com.huellitapp.modelo.Mascota;
+import moviles.unicauca.com.huellitapp.modelo.TipoMascota;
+
 public class AddpetActivity extends AppCompatActivity implements View.OnClickListener
 {
 
@@ -41,12 +45,11 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
     private final int PHOTO_CODE=100;
     private final int SELECT_PICTURE=200;
 
+    private TipoMascota tipoMascota;
     private ImageView imgphotoPet;
     private EditText editNamePet;
     private Button btnAddChangePhoto;
     private Button btnSavePet;
-    private String tipo;
-    private String tipoIdioma;
     private Uri path;
     private Bitmap bitmap;
 
@@ -55,12 +58,12 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addpet);
-
+        tipoMascota=new TipoMascota();
         Bundle extras = getIntent().getExtras();
-        tipo = extras.getString("tipo");
-        tipoIdioma=extras.getString("tipoIdioma");
+        tipoMascota.setTiponombre(extras.getString(TipoMascota.TIPONOMBRE));
+        tipoMascota.setTiponombreingles(extras.getString(TipoMascota.TIPONOMBREINGLES));
 
-        setTitle(getTitle()+" "+tipoIdioma.toLowerCase().replace("s",""));
+        setTitle(getTitle() + " " + tipoMascota.getTiponombreingles().toLowerCase().replace("s", ""));
 
 
         imgphotoPet=(ImageView)findViewById(R.id.img_photopet);
@@ -108,10 +111,10 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
                     }
                     else
                     {
-                        final ParseObject mascota= new ParseObject("mascota");
-                        mascota.put("tiponombre",tipo );
-                        mascota.put("username", ParseUser.getCurrentUser().getUsername());
-                        mascota.put("masnombre", editNamePet.getText().toString());
+                        final ParseObject mascota= new ParseObject(Mascota.TABLA);
+                        mascota.put(Mascota.TIPO,tipoMascota.getTiponombre() );
+                        mascota.put(Mascota.USERNAME, ParseUser.getCurrentUser().getUsername());
+                        mascota.put(Mascota.NOMBRE, editNamePet.getText().toString());
                         mascota.saveInBackground(new SaveCallback()
                         {
                             @Override
@@ -122,9 +125,9 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
                                     byte[] inputData=getByteImagen();
                                     ParseFile file = new ParseFile("foto.jpg", inputData);
                                     file.saveInBackground();
-                                    ParseObject f = new ParseObject("fotomascota");
-                                    f.put("foto",file);
-                                    f.put("mascota", mascota.getObjectId());
+                                    ParseObject f = new ParseObject(FotoMascota.TABLA);
+                                    f.put(FotoMascota.IMAGEN,file);
+                                    f.put(FotoMascota.MASCOTAID, mascota.getObjectId());
                                     f.saveInBackground(new SaveCallback()
                                     {
                                         @Override

@@ -19,6 +19,7 @@ import com.parse.ParseQuery;
 import java.util.List;
 
 import moviles.unicauca.com.huellitapp.R;
+import moviles.unicauca.com.huellitapp.modelo.FotoMascota;
 import moviles.unicauca.com.huellitapp.modelo.Mascota;
 
 /**
@@ -73,19 +74,16 @@ public class MascotaAdapter extends BaseAdapter
         TextView txt_nombremascota = (TextView) v.findViewById(R.id.txt_nombremascota);
         txt_nombremascota.setText(m.getNombre().toUpperCase());
 
-        ////////////////////////////////////////////////////////////
-
-        // Locate the objectId from the class
         final View c=v;
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("fotomascota");
-        query.whereEqualTo("mascota", m.getId());
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(FotoMascota.TABLA);
+        query.whereEqualTo(FotoMascota.MASCOTAID, m.getId());
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> list, ParseException e)
             {
                 if (!list.isEmpty())
                 {
-                    ParseFile fileObject = (ParseFile) list.get(0).get("foto");
+                    ParseFile fileObject = (ParseFile) list.get(0).get(FotoMascota.IMAGEN);
                     fileObject.getDataInBackground(new GetDataCallback()
                     {
                         public void done(byte[] data, ParseException e)

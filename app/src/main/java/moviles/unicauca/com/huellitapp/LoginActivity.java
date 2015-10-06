@@ -1,110 +1,146 @@
 package moviles.unicauca.com.huellitapp;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener
 {
-    private EditText username,password;
-    private Button btnIn;
+    private Button btnFacebook;
+    private Dialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        username=(EditText)findViewById(R.id.edit_username);
-        password=(EditText)findViewById(R.id.edit_password);
-        btnIn=(Button)findViewById(R.id.btn_in);
-
-        btnIn.setOnClickListener(this);
+        btnFacebook=(Button)findViewById(R.id.btn_facebook);
+        btnFacebook.setOnClickListener(this);
     }
-    public boolean isOnline()
-    {
-        ConnectivityManager cm =(ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo netInfo = cm.getActiveNetworkInfo();
-        if (netInfo != null && netInfo.isConnected())
-        {
-            return true;
-        }
-        return false;
-    }
+
     @Override
     public void onClick(View v)
     {
-        if(username.getText().toString().isEmpty() && password.getText().toString().isEmpty() )
-        {
-            Log.i("entroonclick:", getResources().getString(R.string.ingreseUsuarioContraseña));
-            Toast.makeText(this,getResources().getString(R.string.ingreseUsuarioContraseña),Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            if(username.getText().toString().isEmpty())
-            {
-                Toast.makeText(this,getResources().getString(R.string.ingreseUsuario),Toast.LENGTH_SHORT).show();
+        progressDialog = ProgressDialog.show(this, "Logueando con Facebook", "Espere un momento", true);
 
-            }
-            else
-            {
-                if(password.getText().toString().isEmpty())
-                {
-                    Toast.makeText(this,getResources().getString(R.string.ingreseContraseña),Toast.LENGTH_SHORT).show();
+        List<String> permissions = Arrays.asList("public_profile", "user_about_me",
+                "user_birthday", "user_location", "email");
 
+
+
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(this, permissions, new LogInCallback() {
+
+
+
+            @Override
+            public void done(ParseUser user, ParseException err) {
+                progressDialog.dismiss();
+
+
+                if (user == null) {
+                    Log.d("MyApp", "El usuario cancelo el Loggin");
+                } else if (user.isNew()) {
+
+                    Log.d("MyApp", "Primer loggin del Usuario");
+                    makeMeRequest();
+                    //startActivity(new Intent(getApplication(), MainActivity.class));
+
+                } else {
+                    Log.d("MyApp", "El usuario ya estaba logueado");
+                    makeMeRequest();
+                    //startActivity(new Intent(getApplication(), MainActivity.class));
                 }
-                else
-                {
-                    final ProgressDialog dlg = new ProgressDialog(LoginActivity.this);
-                    dlg.setTitle("Please wait.");
-                    dlg.setMessage("Logging in.  Please wait.");
-                    dlg.show();
-                    // Call the Parse login method
-                    if(isOnline())
-                    {
-                        ParseUser.logInInBackground(username.getText().toString(), password.getText()
-                                .toString(), new LogInCallback()
-                        {
-                            @Override
-                            public void done(ParseUser user, ParseException e)
-                            {
-                                dlg.dismiss();
-                                if (e != null)
-                                {
-                                    // Show the error message
-                                    Toast.makeText(LoginActivity.this,getResources().getString(R.string.datosinvalidos), Toast.LENGTH_LONG).show();
-                                } else
-                                {
-                                    // Start an intent for the dispatch activity
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(intent);
-                                    finish();
-                                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+    }
+    private void makeMeRequest() {
+        GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
+                new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject jsonObject, GraphResponse graphResponse) {
+                        if (jsonObject != null) {
+                            JSONObject userProfile = new JSONObject();
+
+                            try {
+                                userProfile.put("facebookId", jsonObject.getLong("id"));
+                                userProfile.put("name", jsonObject.getString("name"));
+
+                                if (jsonObject.getString("gender") != null)
+                                    userProfile.put("gender", jsonObject.getString("gender"));
+
+                                if (jsonObject.getString("email") != null)
+                                    userProfile.put("email", jsonObject.getString("email"));
+
+                                // Save the user profile info in a user property
+                                ParseUser currentUser = ParseUser.getCurrentUser();
+                                currentUser.put("profile", userProfile);
+                                currentUser.saveInBackground();
+
+
+                            } catch (JSONException e) {
+                                Log.d("Myapp",
+                                        "Error parsing returned user data. " + e);
                             }
-                        });
+                        } else if (graphResponse.getError() != null) {
+                            switch (graphResponse.getError().getCategory()) {
+                                case LOGIN_RECOVERABLE:
+                                    Log.d("myapp",
+                                            "Authentication error: " + graphResponse.getError());
+                                    break;
+
+                                case TRANSIENT:
+                                    Log.d("myapp",
+                                            "Transient error. Try again. " + graphResponse.getError());
+                                    break;
+
+                                case OTHER:
+                                    Log.d("myapp",
+                                            "Some other error: " + graphResponse.getError());
+                                    break;
+                            }
+                        }
                     }
-                    else
-                    {
-                        dlg.dismiss();
-                        Toast.makeText(this,"verifique la conexion a internet", Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-        }
+                });
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id,email,gender,name");
+        request.setParameters(parameters);
+        request.executeAsync();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
     }
 }

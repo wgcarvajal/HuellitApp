@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="facebook_app_id">921342471292943</string>
+
     <string name="app_name">HuellitApp</string>
     <string name="open_nav">Menu Abierto</string>
     <string name="close_nav">Menu Cerrado</string>
@@ -42,6 +44,7 @@
     <string name="cancelar"> Cancelar</string>
 
     <string name="eligeOpcion">Elige una opcion :D</string>
+    <string name="btn_facebook">Autenticacion con Facebook</string>
 
 
 </resources>

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="verdeImagen">#4FBF85</color>
+    <color name="azulFacebook">#44619d</color>
+    <color name="blanco">#ffffff</color>
 </resources>

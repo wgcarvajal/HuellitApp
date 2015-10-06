@@ -18,13 +18,13 @@ import java.util.List;
 import moviles.unicauca.com.huellitapp.R;
 import moviles.unicauca.com.huellitapp.adapters.MascotaAdapter;
 import moviles.unicauca.com.huellitapp.modelo.Mascota;
+import moviles.unicauca.com.huellitapp.modelo.TipoMascota;
 
 public class MascotaFragment extends TitleFragment
 {
     public static String POSITIONLIST="poslist";
 
-    private String tipo;
-    private String tipoIdioma;
+    private TipoMascota tipoMascota;
     private ListView lst_mascotas;
     private List<Mascota> data;
     private MascotaAdapter adapter;
@@ -34,10 +34,11 @@ public class MascotaFragment extends TitleFragment
     {
         // Required empty public constructor
     }
-    public void init(String tipo,String tipoIdioma)
+    public void init(String tiponombre,String tiponombreingles)
     {
-        this.tipo=tipo;
-        this.tipoIdioma=tipoIdioma;
+        tipoMascota=new TipoMascota();
+        tipoMascota.setTiponombre(tiponombre);
+        tipoMascota.setTiponombreingles(tiponombreingles);
     }
     @Override
     public void onAttach(Context context)
@@ -51,8 +52,9 @@ public class MascotaFragment extends TitleFragment
         poslist=0;
         if(savedInstanceState!=null)
         {
-            tipo = savedInstanceState.getString("tipo");
-            tipoIdioma=savedInstanceState.getString("tipoIdioma");
+            tipoMascota=new TipoMascota();
+            tipoMascota.setTiponombre(savedInstanceState.getString(TipoMascota.TIPONOMBRE));
+            tipoMascota.setTiponombreingles(savedInstanceState.getString(TipoMascota.TIPONOMBREINGLES));
             poslist=savedInstanceState.getInt(POSITIONLIST);
             Log.i("focus item:",""+ poslist);
         }
@@ -74,16 +76,16 @@ public class MascotaFragment extends TitleFragment
     }
     public void loadData()
     {
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
-        query.whereEqualTo("tiponombre", tipo);
-        query.orderByDescending("createdAt");
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(Mascota.TABLA);
+        query.whereEqualTo(Mascota.TIPO, tipoMascota.getTiponombre());
+        query.orderByDescending(Mascota.FECHACREACION);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (e == null) {
                     for (ParseObject mascota : parseObjects) {
                         Mascota mas = new Mascota();
-                        mas.setNombre(mascota.getString("masnombre"));
+                        mas.setNombre(mascota.getString(Mascota.NOMBRE));
                         mas.setId(mascota.getObjectId());
                         data.add(mas);
                         adapter.notifyDataSetChanged();
@@ -95,32 +97,31 @@ public class MascotaFragment extends TitleFragment
     }
     @Override
     public String getTitle() {
-        return tipoIdioma;
+        return tipoMascota.getTiponombreingles();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState)
     {
-        outState.putString("tipo", tipo);
-        outState.putString("tipoIdioma", tipoIdioma);
+        outState.putString(TipoMascota.TIPONOMBRE, tipoMascota.getTiponombre());
+        outState.putString(TipoMascota.TIPONOMBREINGLES, tipoMascota.getTiponombreingles());
         outState.putInt(POSITIONLIST,lst_mascotas.getFirstVisiblePosition());
         super.onSaveInstanceState(outState);
     }
 
-
-    public void buscar(String nombre)
+    public void buscar(String nombremascota)
     {
         data.clear();
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("mascota");
-        query.whereEqualTo("tiponombre", tipo);
-        query.whereContains("masnombre", nombre);
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(Mascota.TABLA);
+        query.whereEqualTo(Mascota.TIPO, tipoMascota.getTiponombre());
+        query.whereContains(Mascota.NOMBRE, nombremascota);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
                 if (e == null) {
                     for (ParseObject mascota : parseObjects) {
                         Mascota mas = new Mascota();
-                        mas.setNombre(mascota.getString("masnombre"));
+                        mas.setNombre(mascota.getString(Mascota.NOMBRE));
                         mas.setId(mascota.getObjectId());
                         data.add(mas);
 

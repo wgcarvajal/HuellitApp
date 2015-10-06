@@ -27,6 +27,7 @@ import moviles.unicauca.com.huellitapp.adapters.PagerAdapter;
 import moviles.unicauca.com.huellitapp.fragments.MascotaFragment;
 import moviles.unicauca.com.huellitapp.fragments.MyMascotaFragment;
 import moviles.unicauca.com.huellitapp.fragments.TitleFragment;
+import moviles.unicauca.com.huellitapp.modelo.TipoMascota;
 
 public class MypublicationsActivity extends AppCompatActivity implements DrawerLayout.DrawerListener, NavigationView.OnNavigationItemSelectedListener
 {
@@ -63,8 +64,8 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
         adapter = new PagerAdapter(getSupportFragmentManager(), data);
         pager.setAdapter(adapter);
 
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("tipomascota");
-        query.addAscendingOrder("tiponombre");
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(TipoMascota.TABLA);
+        query.addAscendingOrder(TipoMascota.TIPONOMBRE);
         query.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> parseObjects, ParseException e) {
@@ -76,9 +77,9 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
                         String idioma = getResources().getString(R.string.idiomaactual);
                         MyMascotaFragment mascotaFragment = new MyMascotaFragment();
                         if (idioma.equals("ingles")) {
-                            mascotaFragment.init(tipomascota.getString("tiponombre"), tipomascota.getString("tiponombreingles"));
+                            mascotaFragment.init(tipomascota.getString(TipoMascota.TIPONOMBRE), tipomascota.getString(TipoMascota.TIPONOMBREINGLES));
                         } else {
-                            mascotaFragment.init(tipomascota.getString("tiponombre"), tipomascota.getString("tiponombre"));
+                            mascotaFragment.init(tipomascota.getString(TipoMascota.TIPONOMBRE), tipomascota.getString(TipoMascota.TIPONOMBRE));
                         }
                         data.add(mascotaFragment);
                         adapter.notifyDataSetChanged();
@@ -122,8 +123,8 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
                 case R.id.action_add:
 
                     Intent intent = new Intent(this,AddpetActivity.class);
-                    intent.putExtra("tipo",((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).getTipo());
-                    intent.putExtra("tipoIdioma",((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).getTipoIdioma());
+                    intent.putExtra(TipoMascota.TIPONOMBRE,((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).getTipo());
+                    intent.putExtra(TipoMascota.TIPONOMBREINGLES,((MyMascotaFragment)adapter.getItem(pager.getCurrentItem())).getTipoIdioma());
                     startActivityForResult(intent, ADD_CODE);
                 break;
 
