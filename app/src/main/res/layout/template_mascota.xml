@@ -38,6 +38,21 @@
                     android:textSize="@dimen/text_size_little"
                     android:textColor="@color/verdeImagen"
                     />
+                <TextView
+
+                    android:id="@+id/txt_desc_mascota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_little"
+                    android:textColor="@color/verdeImagen"
+                    android:layout_below="@id/txt_nombremascota"
+                    />
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_desc_mascota"
+                    android:text="@string/txt_btn_ubicacion"
+                    />
 
 
             </RelativeLayout>

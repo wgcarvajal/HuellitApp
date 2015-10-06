@@ -46,6 +46,7 @@
 
     <string name="eligeOpcion">make your choice :D</string>
     <string name="btn_facebook">Login with Facebook</string>
+    <string name="txt_btn_ubicacion">Marcar Ubicación</string>
 
     <string-array name="meses">
         <item>1</item>
@@ -57,6 +58,7 @@
         <item>7</item>
         <item>8</item>
     </string-array>
+    <string name="title_activity_activity_map">activity_map</string>
 
 
 
