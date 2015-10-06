@@ -64,24 +64,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     Log.d("MyApp", "Primer loggin del Usuario");
                     makeMeRequest();
-                    //startActivity(new Intent(getApplication(), MainActivity.class));
+                    startActivity(new Intent(getApplication(), MainActivity.class));
+                    finish();
 
                 } else {
                     Log.d("MyApp", "El usuario ya estaba logueado");
-                    makeMeRequest();
-                    //startActivity(new Intent(getApplication(), MainActivity.class));
+
+                    startActivity(new Intent(getApplication(), MainActivity.class));
+                    finish();
                 }
             }
         });
-
-
-
-
-
-
-
-
-
     }
     private void makeMeRequest() {
         GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),

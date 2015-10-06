@@ -166,6 +166,10 @@ public class MypublicationsActivity extends AppCompatActivity implements DrawerL
         Intent intent;
         switch (menuItem.getItemId())
         {
+            case R.id.nav_profile:
+                intent = new Intent(this,PerfilActivity.class);
+                startActivity(intent);
+                break;
             case R.id.nav_sessionout:
 
                 ParseUser.getCurrentUser().logOut();

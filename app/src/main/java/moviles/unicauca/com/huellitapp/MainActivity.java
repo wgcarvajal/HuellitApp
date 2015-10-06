@@ -154,6 +154,10 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         Intent intent;
         switch (menuItem.getItemId())
         {
+            case R.id.nav_profile:
+                intent = new Intent(this,PerfilActivity.class);
+                startActivity(intent);
+            break;
             case R.id.nav_sessionout:
 
                 ParseUser.getCurrentUser().logOut();

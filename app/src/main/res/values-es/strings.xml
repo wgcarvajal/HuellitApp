@@ -46,5 +46,10 @@
     <string name="eligeOpcion">Elige una opcion :D</string>
     <string name="btn_facebook">Autenticacion con Facebook</string>
 
+    <string name="genero_masculino">Masculino</string>
+    <string name="genero_femenino">Femenino</string>
+
+    <string name="mi_perfil">Mi perfil</string>
+
 
 </resources>

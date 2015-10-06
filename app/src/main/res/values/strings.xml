@@ -59,6 +59,12 @@
         <item>8</item>
     </string-array>
     <string name="title_activity_activity_map">activity_map</string>
+    <string name="title_activity_perfil">PerfilActivity</string>
+
+    <string name="genero_masculino">Male</string>
+    <string name="genero_femenino">Female</string>
+
+    <string name="mi_perfil">My profile</string>
 
 
 
