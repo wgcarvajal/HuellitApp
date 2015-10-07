@@ -51,5 +51,10 @@
 
     <string name="mi_perfil">Mi perfil</string>
 
+    <string name="edad">Edad</string>
+
+    <string name="meses">Meses</string>
+    <string name="anos">Años</string>
+
 
 </resources>

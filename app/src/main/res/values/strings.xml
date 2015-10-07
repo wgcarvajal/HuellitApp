@@ -48,7 +48,7 @@
     <string name="btn_facebook">Login with Facebook</string>
     <string name="txt_btn_ubicacion">Marcar Ubicación</string>
 
-    <string-array name="meses">
+    <string-array name="edades">
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -57,6 +57,9 @@
         <item>6</item>
         <item>7</item>
         <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
     </string-array>
     <string name="title_activity_activity_map">activity_map</string>
     <string name="title_activity_perfil">PerfilActivity</string>
@@ -65,6 +68,9 @@
     <string name="genero_femenino">Female</string>
 
     <string name="mi_perfil">My profile</string>
+    <string name="edad">Age</string>
+    <string name="meses">Months</string>
+    <string name="anos">Years</string>
 
 
 

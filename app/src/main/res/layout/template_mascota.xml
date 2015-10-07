@@ -40,12 +40,22 @@
                     />
                 <TextView
 
-                    android:id="@+id/txt_desc_mascota"
+                    android:id="@+id/txt_edad_mascota"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_little"
                     android:textColor="@color/verdeImagen"
                     android:layout_below="@id/txt_nombremascota"
+                    />
+                <TextView
+
+                    android:id="@+id/txt_desc_mascota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_little"
+                    android:textSize="@dimen/text_size_little"
+                    android:textColor="@color/verdeImagen"
+                    android:layout_below="@id/txt_edad_mascota"
                     />
                 
 

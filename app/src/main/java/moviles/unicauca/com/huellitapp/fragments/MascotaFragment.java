@@ -87,7 +87,7 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
         lst_mascotas.setAdapter(adapter);
         lst_mascotas.setOnItemClickListener(this);
 
-        imgUbicacion.setOnClickListener(this);
+
 
         loadData();
 
@@ -116,6 +116,9 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
                         Mascota mas = new Mascota();
                         mas.setNombre(mascota.getString(Mascota.NOMBRE));
                         mas.setId(mascota.getObjectId());
+                        mas.setEdad((Integer) mascota.getNumber(Mascota.EDAD));
+                        mas.setTipo(mascota.getString(Mascota.TIPO));
+                        mas.setDescripcion(mascota.getString(Mascota.DESCRIPCION));
                         data.add(mas);
                         adapter.notifyDataSetChanged();
                     }
@@ -152,6 +155,9 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
                         Mascota mas = new Mascota();
                         mas.setNombre(mascota.getString(Mascota.NOMBRE));
                         mas.setId(mascota.getObjectId());
+                        mas.setTipo(mascota.getString(Mascota.TIPO));
+                        mas.setDescripcion(mascota.getString(Mascota.DESCRIPCION));
+                        mas.setEdad((Integer)mascota.getNumber(Mascota.EDAD));
                         data.add(mas);
 
                     }

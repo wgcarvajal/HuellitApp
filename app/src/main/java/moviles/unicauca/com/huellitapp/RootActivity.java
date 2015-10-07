@@ -26,14 +26,13 @@ public class RootActivity extends AppCompatActivity
 
 
         ParseUser currentUser = ParseUser.getCurrentUser();
-        /*if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
+        if ((currentUser != null) && ParseFacebookUtils.isLinked(currentUser)) {
             intent=new Intent(this,MainActivity.class);
         }
         else
         {
             intent=new Intent(this,LoginActivity.class);
-        }*/
-        intent=new Intent(this,activity_map.class);
+        }
         startActivity(intent);
         finish();
     }

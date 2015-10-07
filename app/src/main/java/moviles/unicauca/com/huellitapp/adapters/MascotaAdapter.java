@@ -72,7 +72,28 @@ public class MascotaAdapter extends BaseAdapter
 
         Mascota m = (Mascota) getItem(position);
         TextView txt_nombremascota = (TextView) v.findViewById(R.id.txt_nombremascota);
+        TextView txt_edad=(TextView)v.findViewById(R.id.txt_edad_mascota);
+        TextView txt_descripcion=(TextView)v.findViewById(R.id.txt_desc_mascota);
         txt_nombremascota.setText(m.getNombre().toUpperCase());
+        if(m.getDescripcion().length()>100)
+        {
+            txt_descripcion.setText(m.getDescripcion().substring(0,100));
+        }
+        else
+        {
+            txt_descripcion.setText(m.getDescripcion());
+        }
+
+
+        if(m.getTipo().equals("Cachorros"))
+        {
+            txt_edad.setText(m.getEdad()+" "+v.getResources().getString(R.string.meses));
+        }
+        else
+        {
+            txt_edad.setText(m.getEdad()+" "+v.getResources().getString(R.string.anos));
+        }
+
 
         final View c=v;
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>(FotoMascota.TABLA);

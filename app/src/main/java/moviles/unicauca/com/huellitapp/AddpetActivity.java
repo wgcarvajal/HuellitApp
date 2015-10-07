@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -52,6 +54,8 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
     private Button btnSavePet;
     private Uri path;
     private Bitmap bitmap;
+    private Spinner spEdad;
+    private TextView txtEdad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,6 +72,19 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
 
         imgphotoPet=(ImageView)findViewById(R.id.img_photopet);
         editNamePet=(EditText)findViewById(R.id.edit_petname);
+        spEdad=(Spinner)findViewById(R.id.sp_edad);
+        txtEdad=(TextView)findViewById(R.id.txt_edad);
+
+        if(tipoMascota.getTiponombre().equals("Cachorros"))
+        {
+            txtEdad.setText(getResources().getString(R.string.edad)+"("+getResources().getString(R.string.meses)+")");
+        }
+        else
+        {
+            txtEdad.setText(getResources().getString(R.string.edad)+"("+getResources().getString(R.string.anos)+")");
+
+        }
+
         btnSavePet=(Button)findViewById(R.id.btn_savepet);
         btnSavePet.setOnClickListener(this);
         btnAddChangePhoto=(Button)findViewById(R.id.btn_addchangephote);
@@ -115,6 +132,7 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
                         mascota.put(Mascota.TIPO,tipoMascota.getTiponombre() );
                         mascota.put(Mascota.USERNAME, ParseUser.getCurrentUser().getUsername());
                         mascota.put(Mascota.NOMBRE, editNamePet.getText().toString());
+                        mascota.put(Mascota.EDAD,Integer.parseInt(spEdad.getSelectedItem().toString()));
                         mascota.saveInBackground(new SaveCallback()
                         {
                             @Override

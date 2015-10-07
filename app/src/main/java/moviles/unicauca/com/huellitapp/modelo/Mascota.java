@@ -13,12 +13,16 @@ public class Mascota
     public static String TIPO="tiponombre";
     public static String FECHACREACION="createdAt";
     public static String USERNAME="username";
+    public static String EDAD="masedad";
+    public static String DESCRIPCION="masdescripcion";
 
 
 
     private String nombre;
     private String tipo;
     private String id;
+    private String descripcion;
+    private int edad;
 
     public Mascota()
     {
@@ -52,5 +56,21 @@ public class Mascota
     public void setId(String id)
     {
         this.id = id;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }

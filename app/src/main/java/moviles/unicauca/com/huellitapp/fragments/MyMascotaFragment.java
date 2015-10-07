@@ -97,6 +97,9 @@ public class MyMascotaFragment extends TitleFragment{
                         Mascota mas = new Mascota();
                         mas.setNombre(mascota.getString(Mascota.NOMBRE));
                         mas.setId(mascota.getObjectId());
+                        mas.setEdad((Integer) mascota.getNumber(Mascota.EDAD));
+                        mas.setTipo(mascota.getString(Mascota.TIPO));
+                        mas.setDescripcion(mascota.getString(Mascota.DESCRIPCION));
                         data.add(mas);
                         adapter.notifyDataSetChanged();
                     }
@@ -137,6 +140,9 @@ public class MyMascotaFragment extends TitleFragment{
                         Mascota mas = new Mascota();
                         mas.setNombre(mascota.getString(Mascota.NOMBRE));
                         mas.setId(mascota.getObjectId());
+                        mas.setEdad((Integer) mascota.getNumber(Mascota.EDAD));
+                        mas.setTipo(mascota.getString(Mascota.TIPO));
+                        mas.setDescripcion(mascota.getString(Mascota.DESCRIPCION));
                         data.add(mas);
 
                     }

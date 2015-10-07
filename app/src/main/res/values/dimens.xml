@@ -6,6 +6,7 @@
     <dimen name="logo_wh">250dp</dimen>
     <dimen name="image_height_litte">140dp</dimen>
     <dimen name="text_size_little">12sp</dimen>
+    <dimen name="margin_little">10dp</dimen>
 
 
 </resources>
