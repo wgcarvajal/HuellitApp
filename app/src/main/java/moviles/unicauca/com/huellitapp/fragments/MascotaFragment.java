@@ -81,7 +81,7 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_mascota, container, false);
         lst_mascotas=(ListView) v.findViewById(R.id.lst_mascotas);
-        imgUbicacion=(ImageView)v.findViewById(R.id.img_ubicacion);
+
         data=new ArrayList<>();
         adapter= new MascotaAdapter(v.getContext(),data);
         lst_mascotas.setAdapter(adapter);
