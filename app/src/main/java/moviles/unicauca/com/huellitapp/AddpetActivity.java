@@ -56,6 +56,7 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
     private Bitmap bitmap;
     private Spinner spEdad;
     private TextView txtEdad;
+    private EditText editPetDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,8 +73,10 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
 
         imgphotoPet=(ImageView)findViewById(R.id.img_photopet);
         editNamePet=(EditText)findViewById(R.id.edit_petname);
+
         spEdad=(Spinner)findViewById(R.id.sp_edad);
         txtEdad=(TextView)findViewById(R.id.txt_edad);
+        editPetDescription=(EditText)findViewById(R.id.edit_pet_descripcion);
 
         if(tipoMascota.getTiponombre().equals("Cachorros"))
         {
@@ -128,44 +131,53 @@ public class AddpetActivity extends AppCompatActivity implements View.OnClickLis
                     }
                     else
                     {
-                        final ParseObject mascota= new ParseObject(Mascota.TABLA);
-                        mascota.put(Mascota.TIPO,tipoMascota.getTiponombre() );
-                        mascota.put(Mascota.USERNAME, ParseUser.getCurrentUser().getUsername());
-                        mascota.put(Mascota.NOMBRE, editNamePet.getText().toString());
-                        mascota.put(Mascota.EDAD,Integer.parseInt(spEdad.getSelectedItem().toString()));
-                        mascota.saveInBackground(new SaveCallback()
+                        if(editPetDescription.getText().toString().isEmpty())
                         {
-                            @Override
-                            public void done(ParseException e)
+                            Toast.makeText(getApplicationContext(),getResources().getString(R.string.ingreseDescripcion),Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            final ParseObject mascota= new ParseObject(Mascota.TABLA);
+                            mascota.put(Mascota.TIPO,tipoMascota.getTiponombre() );
+                            mascota.put(Mascota.USERNAME, ParseUser.getCurrentUser().getUsername());
+                            mascota.put(Mascota.NOMBRE, editNamePet.getText().toString());
+                            mascota.put(Mascota.EDAD,Integer.parseInt(spEdad.getSelectedItem().toString()));
+                            mascota.put(Mascota.DESCRIPCION,editPetDescription.getText().toString());
+                            mascota.saveInBackground(new SaveCallback()
                             {
-                                if (e == null)
+                                @Override
+                                public void done(ParseException e)
                                 {
-                                    byte[] inputData=getByteImagen();
-                                    ParseFile file = new ParseFile("foto.jpg", inputData);
-                                    file.saveInBackground();
-                                    ParseObject f = new ParseObject(FotoMascota.TABLA);
-                                    f.put(FotoMascota.IMAGEN,file);
-                                    f.put(FotoMascota.MASCOTAID, mascota.getObjectId());
-                                    f.saveInBackground(new SaveCallback()
+                                    if (e == null)
                                     {
-                                        @Override
-                                        public void done(ParseException e)
+                                        byte[] inputData=getByteImagen();
+                                        ParseFile file = new ParseFile("foto.jpg", inputData);
+                                        file.saveInBackground();
+                                        ParseObject f = new ParseObject(FotoMascota.TABLA);
+                                        f.put(FotoMascota.IMAGEN,file);
+                                        f.put(FotoMascota.MASCOTAID, mascota.getObjectId());
+                                        f.saveInBackground(new SaveCallback()
                                         {
-                                            if (e == null)
+                                            @Override
+                                            public void done(ParseException e)
                                             {
-                                                Intent intent = new Intent();
-                                                intent.putExtra("resultado","S");
-                                                setResult(RESULT_OK, intent);
-                                                finish();
+                                                if (e == null)
+                                                {
+                                                    Intent intent = new Intent();
+                                                    intent.putExtra("resultado","S");
+                                                    setResult(RESULT_OK, intent);
+                                                    finish();
+                                                }
+
                                             }
+                                        });
 
-                                        }
-                                    });
-
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
+
                 }
             break;
             case R.id.btn_addchangephote:

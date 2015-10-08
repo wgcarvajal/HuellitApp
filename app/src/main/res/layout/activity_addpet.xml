@@ -35,6 +35,12 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/edades"
                 />
+            <EditText
+                android:id="@+id/edit_pet_descripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_pet_description"
+                />
 
             <Button
                 android:id="@+id/btn_addchangephote"

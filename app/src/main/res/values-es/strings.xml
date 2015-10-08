@@ -24,6 +24,7 @@
     <string name="datosinvalidos">Usuario o contraseña invalidos</string>
     <string name="ingreseMascota">Ingrese nombre de la mascota</string>
     <string name="ingreseFoto">Seleccione una foto</string>
+    <string name="ingreseDescripcion">Ingrese descripcion</string>
 
     <string name="action_search">Buscar</string>
     <string name="action_add">Agregar</string>
@@ -55,6 +56,18 @@
 
     <string name="meses">Meses</string>
     <string name="anos">Años</string>
+
+
+    <string name="action_edit">Editar</string>
+    <string name="action_delete">Eliminar</string>
+    <string name="dialog_eliminar">Eliminar</string>
+    <string name="dialog_pregunta">Deseas eliminar la mascota</string>
+    <string name="dialog_aceptar">Aceptar</string>
+    <string name="dialog_cancelar">Cancelar</string>
+    <string name="edit_pet_description">Descripcion</string>
+
+    <string name="btn_sig">Sig</string>
+    <string name="btn_ant">Ant</string>
 
 
 </resources>

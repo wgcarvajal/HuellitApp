@@ -205,7 +205,15 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
 
 
     @Override
-    public void onItemSelected(String idmascota) {
-        Log.i("id mascota seleccion:",""+idmascota);
+    public void onItemSelected(Mascota mascota)
+    {
+        Intent intent = new Intent(this,PetActivity.class);
+        intent.putExtra(PetActivity.IDMASCOTA,mascota.getId());
+        intent.putExtra(PetActivity.NOMBREMASCOTA,mascota.getNombre());
+        intent.putExtra(PetActivity.EDADMASCOTA,""+mascota.getEdad());
+        intent.putExtra(PetActivity.TIPO,mascota.getTipo());
+        intent.putExtra(PetActivity.DESCRIPCIONMASCOTA,mascota.getDescripcion());
+        startActivity(intent);
+        Log.i("id mascota seleccion:",""+mascota.getId());
     }
 }

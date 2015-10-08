@@ -24,6 +24,7 @@
     <string name="datosinvalidos">Invalid login parameters</string>
     <string name="ingreseMascota">Enter name pet</string>
     <string name="ingreseFoto">Choose picture</string>
+    <string name="ingreseDescripcion">Enter description</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -72,7 +73,17 @@
     <string name="meses">Months</string>
     <string name="anos">Years</string>
 
+    <string name="action_edit">Edit</string>
+    <string name="action_delete">Delete</string>
 
+    <string name="dialog_eliminar">Delete</string>
+    <string name="dialog_pregunta">You want to remove the pet</string>
+    <string name="dialog_aceptar">Accept</string>
+    <string name="dialog_cancelar">Cancel</string>
+    <string name="edit_pet_description">Description</string>
+    <string name="title_activity_pet">PetActivity</string>
+    <string name="btn_sig">Next</string>
+    <string name="btn_ant">Prev</string>
 
 
 </resources>

@@ -43,7 +43,7 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
 
     public interface OnItemSelected
     {
-        void onItemSelected(String idmascota);
+        void onItemSelected(Mascota mascota);
     }
 
     OnItemSelected onItemSelected;
@@ -97,7 +97,7 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
         Log.i("Entro", "onitemclick");
-        onItemSelected.onItemSelected(data.get(position).getId());
+        onItemSelected.onItemSelected(data.get(position));
     }
     @Override
     public void onClick(View v) {

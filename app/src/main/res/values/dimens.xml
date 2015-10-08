@@ -7,6 +7,9 @@
     <dimen name="image_height_litte">140dp</dimen>
     <dimen name="text_size_little">12sp</dimen>
     <dimen name="margin_little">10dp</dimen>
+    <dimen name="tam_img_ver_foto_mascota">200dp</dimen>
+    <dimen name="tam_text_nombre_mascota">25sp</dimen>
+    <dimen name="tama_litte_string">18sp</dimen>
 
 
 </resources>

@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="moviles.unicauca.com.huellitapp.PetActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txt_ver_nombre_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/tam_text_nombre_mascota"
+                android:text="hola mucho"
+                />
+
+            <ImageView
+                android:id="@+id/img_ver_foto_macota"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tam_img_ver_foto_mascota"
+                android:layout_below="@id/txt_ver_nombre_mascota"/>
+            <Button
+                android:id="@+id/btn_anterior"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_ver_nombre_mascota"
+                android:layout_alignLeft="@id/img_ver_foto_macota"
+                android:text="@string/btn_ant"/>
+
+            <Button
+                android:id="@+id/btn_siguiente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_ver_nombre_mascota"
+                android:layout_alignRight="@id/img_ver_foto_macota"
+                android:text="@string/btn_sig"/>
+
+            <TextView
+                android:id="@+id/txt_posicion_foto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tama_litte_string"
+                android:gravity="center"
+                android:layout_below="@id/img_ver_foto_macota"
+                />
+
+            <TextView
+                android:id="@+id/txt_ver_edad_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tama_litte_string"
+                android:layout_below="@id/txt_posicion_foto"
+                />
+            <TextView
+                android:id="@+id/txt_ver_desc_mascota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_ver_edad_mascota"
+                android:textSize="@dimen/tama_litte_string"/>
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
