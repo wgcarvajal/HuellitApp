@@ -9,7 +9,7 @@
     <ImageView
         android:layout_width="@dimen/logo_wh"
         android:layout_height="@dimen/logo_wh"
-        android:src="@mipmap/ic_logo"
+        android:src="@mipmap/logo"
         android:layout_centerInParent="true"
         />
 
