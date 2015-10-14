@@ -213,6 +213,7 @@ public class MainActivity extends AppCompatActivity implements DrawerLayout.Draw
         intent.putExtra(PetActivity.EDADMASCOTA,""+mascota.getEdad());
         intent.putExtra(PetActivity.TIPO,mascota.getTipo());
         intent.putExtra(PetActivity.DESCRIPCIONMASCOTA,mascota.getDescripcion());
+        intent.putExtra(PetActivity.RESPONSABLE,mascota.getResponsable());
         startActivity(intent);
         Log.i("id mascota seleccion:",""+mascota.getId());
     }

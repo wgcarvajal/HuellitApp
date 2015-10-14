@@ -118,6 +118,7 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
                         mas.setId(mascota.getObjectId());
                         mas.setEdad((Integer) mascota.getNumber(Mascota.EDAD));
                         mas.setTipo(mascota.getString(Mascota.TIPO));
+                        mas.setResponsable(mascota.getString(Mascota.RESPONSABLE));
                         mas.setDescripcion(mascota.getString(Mascota.DESCRIPCION));
                         data.add(mas);
                         adapter.notifyDataSetChanged();
@@ -157,6 +158,7 @@ public class MascotaFragment extends TitleFragment implements AdapterView.OnItem
                         mas.setId(mascota.getObjectId());
                         mas.setTipo(mascota.getString(Mascota.TIPO));
                         mas.setDescripcion(mascota.getString(Mascota.DESCRIPCION));
+                        mas.setResponsable(mascota.getString(Mascota.RESPONSABLE));
                         mas.setEdad((Integer)mascota.getNumber(Mascota.EDAD));
                         data.add(mas);
 

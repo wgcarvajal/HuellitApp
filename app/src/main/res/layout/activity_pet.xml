@@ -50,6 +50,7 @@
                 android:textSize="@dimen/tama_litte_string"
                 android:gravity="center"
                 android:layout_below="@id/img_ver_foto_macota"
+
                 />
 
             <TextView
@@ -64,6 +65,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txt_ver_edad_mascota"
+                android:textSize="@dimen/tama_litte_string"/>
+
+            <TextView
+                android:id="@+id/txt_propietario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_ver_desc_mascota"
+                android:textSize="@dimen/tama_litte_string"/>
+
+            <TextView
+                android:id="@+id/txt_correo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_propietario"
                 android:textSize="@dimen/tama_litte_string"/>
         </RelativeLayout>
     </ScrollView>

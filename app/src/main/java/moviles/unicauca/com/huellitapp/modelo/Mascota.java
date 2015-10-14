@@ -15,6 +15,7 @@ public class Mascota
     public static String USERNAME="username";
     public static String EDAD="masedad";
     public static String DESCRIPCION="masdescripcion";
+    public static String RESPONSABLE="username";
 
 
 
@@ -23,6 +24,7 @@ public class Mascota
     private String id;
     private String descripcion;
     private int edad;
+    private String responsable;
 
     public Mascota()
     {
@@ -72,5 +74,13 @@ public class Mascota
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(String responsable) {
+        this.responsable = responsable;
     }
 }
